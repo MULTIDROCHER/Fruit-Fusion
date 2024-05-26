@@ -6,14 +6,12 @@ Source code may not be redistributed. Use in apps and games is fine.
 */
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
 
 #if UNITY_EDITOR
 
-using UnityEditor;
 
 #endif
 
@@ -494,7 +492,7 @@ namespace DigitalRuby.AdvancedPolygonCollider
 
 #endif
 
-                Debug.Log("Updated polygon.");
+                //Debug.Log("Updated polygon.");
             }
             catch (Exception ex)
             {

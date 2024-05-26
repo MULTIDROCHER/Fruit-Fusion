@@ -126,12 +126,12 @@ TextureImporter:
       name: blender_0
       rect:
         serializedVersion: 2
-        x: 230
-        y: 395
-        width: 228
-        height: 126
+        x: 225
+        y: 391
+        width: 237
+        height: 133
       alignment: 9
-      pivot: {x: 1, y: 0.44980246}
+      pivot: {x: 0.9910245, y: 0.40909296}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -147,10 +147,10 @@ TextureImporter:
       name: blender_1
       rect:
         serializedVersion: 2
-        x: 513
-        y: 12
-        width: 375
-        height: 410
+        x: 510
+        y: 9
+        width: 381
+        height: 415
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
