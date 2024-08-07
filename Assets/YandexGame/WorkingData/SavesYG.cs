@@ -1,4 +1,6 @@
 ﻿
+using FoodFusion;
+
 namespace YG
 {
     [System.Serializable]
@@ -11,13 +13,13 @@ namespace YG
         public bool promptDone;
 
         // Ваши сохранения
-
         public int Score;
-        public bool[] OpenedDatas;
+        public FoodDatasPack DataPack;
 
         public SavesYG()
         {
-
+            Score = 0;
+            DataPack = null;
         }
     }
 }
