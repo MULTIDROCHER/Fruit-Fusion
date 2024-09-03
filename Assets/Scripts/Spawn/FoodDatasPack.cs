@@ -53,9 +53,9 @@ namespace FoodFusion
 
         public FoodData GetRandom()
         {
-            int range = (int)(Datas.Where(x => x.Value == true).Count() / 2.5f);
+            var amount = Datas.Count(x => x.Value == true);
 
-            return Datas.Keys.ElementAt(UnityEngine.Random.Range(0, range));
+            return Datas.Keys.ElementAt((int)UnityEngine.Random.Range(0, amount/ 2f));
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,54 +9,57 @@ namespace FoodFusion
     public class Blender : MonoBehaviour
     {
         [SerializeField] private BuoyancyEffector2D _water;
-        [SerializeField] private Button _button;
 
-        private float _duration = .3f;
+        [SerializeField] private BlenderCap _cap;
+        [SerializeField] private WaterLevel _waterLevel;
+
         private float _magnitude = 500;
-
-        public event Action Activated;
-        public event Action Deactivated;
+        private float _timer;
+        private WaitForSeconds _magnitudeChangeDelay = new(.25f);
 
         //private float _timer;
         //private float _delay = 300;
+        public event Action Activated;
+        public event Action Deactivated;
 
-        private void Start()
-        {
-            _button.onClick.AddListener(BlenderOn);
-        }
-
-        private void OnDestroy()
-        {
-            _button.onClick.RemoveListener(BlenderOn);
-        }
-
-        private void BlenderOn()
+        public void BlenderOn(float duration)
         {
             Activated?.Invoke();
-            StartCoroutine(Blend());
+            Debug.Log("BlenderOn for " + duration);
+
+            DOTween.Sequence()
+            .Append(_cap.Close())
+            .Join(_waterLevel.Raise(duration / 4))
+            .OnComplete(() => StartCoroutine(Blend(duration)));
         }
 
-        private void BlenderOff()
+        private IEnumerator Blend(float duration)
         {
-            _water.flowMagnitude = 0;
-            Deactivated?.Invoke();
-        }
-
-        private IEnumerator Blend()
-        {
-            var timer = _duration;
-
+            _timer = 0;
             _water.flowMagnitude = _magnitude;
 
-            while (timer > 0)
+            while (_timer <= duration)
             {
-                timer -= Time.deltaTime;
+                _timer += Time.unscaledDeltaTime;
 
-                yield return new WaitForSeconds(.4f);
+                yield return _magnitudeChangeDelay;
                 _water.flowMagnitude = -_water.flowMagnitude;
             }
 
-            BlenderOff();
+            BlenderOff(duration);
+            Debug.Log("completed");
+        }
+
+        public void BlenderOff(float duration)
+        {
+            DOTween.Sequence()
+            .Append(DOTween.To(() => _water.flowMagnitude, magnitude => _water.flowMagnitude = magnitude, 0, duration))
+            .Join(_cap.Open())
+            .OnComplete(() =>
+            {
+                Deactivated?.Invoke();
+                _waterLevel.Lower(duration);
+            });
         }
     }
 }

@@ -8,7 +8,7 @@ namespace FoodFusion
     {
         [SerializeField] private float _dropForce = 5f;
 
-        private WaitForSeconds _createDelay = new(0.5f);
+        private WaitForSeconds _createDelay = new(.5f);
         private InputHandler _input;
         private NextFoodHolder _foodHolder;
         private FoodObject _currentObject;
@@ -26,11 +26,13 @@ namespace FoodFusion
             _input.OnMouseUp += Drop;
         }
 
-        private void OnEnable() {
+        private void OnEnable()
+        {
             _currentObject?.gameObject.SetActive(true);
         }
 
-        private void OnDisable() {
+        private void OnDisable()
+        {
             _currentObject?.gameObject.SetActive(false);
         }
 
@@ -41,11 +43,8 @@ namespace FoodFusion
 
         private void Drop()
         {
-            if (gameObject.activeSelf == false)
+            if (gameObject.activeSelf == false || _currentObject == null)
                 return;
-
-            if (_currentObject == null)
-                GetObject();
 
             _currentObject.Drop(AddForce());
             _currentObject = null;
@@ -54,6 +53,9 @@ namespace FoodFusion
 
         private void GetObject()
         {
+            if (_currentObject != null)
+                return;
+
             _currentObject = _foodHolder.GetObject();
 
             _currentObject.gameObject.SetActive(true);
@@ -68,7 +70,8 @@ namespace FoodFusion
 
         private Vector3 AddForce()
         {
-            return (_input.MousePosition - transform.position) * _dropForce;
+            var direction = (_input.MousePosition - transform.position).normalized;
+            return direction * _dropForce;
         }
     }
 }

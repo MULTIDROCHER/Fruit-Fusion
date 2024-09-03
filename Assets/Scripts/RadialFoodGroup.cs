@@ -31,13 +31,11 @@ namespace FoodFusion
         {
             _foodGroup = new Image[_assets.Datas.Count];
 
-            Debug.Log(_foodGroup.Length);
-
             for (int i = 0; i < _foodGroup.Length; i++)
             {
                 _foodGroup[i] = Instantiate(_imageTemplate, transform);
                 _foodGroup[i].sprite = _assets.Datas.Keys.ElementAt(i).Sprite;
-                //_foodGroup[i].SetNativeSize();
+                _foodGroup[i].SetNativeSize();
                 SetImageColor(i);
             }
         }
