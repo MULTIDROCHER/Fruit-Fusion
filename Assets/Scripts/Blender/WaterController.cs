@@ -9,7 +9,6 @@ namespace FoodFusion
     {
         [SerializeField] private float _stateDuration;
         [SerializeField] private float _fillingDelay;
-        [SerializeField] private float _fillDuration;
 
         private Blender _blender;
         private WaterLevel _water;
@@ -54,9 +53,9 @@ namespace FoodFusion
             while (_autofilling)
             {
                 yield return _delay;
-                _water.Raise(_fillDuration).Play();
+                _water.Raise().Play();
                 yield return _duration;
-                _water.Lower(_fillDuration).Play();
+                _water.Lower().Play();
             }
         }
     }

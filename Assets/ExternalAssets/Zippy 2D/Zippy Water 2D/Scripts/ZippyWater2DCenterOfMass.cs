@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class ZippyWater2DCenterOfMass : MonoBehaviour {
 	[Tooltip("Set the point of balance. Useful for keeping things upright in the water.")]

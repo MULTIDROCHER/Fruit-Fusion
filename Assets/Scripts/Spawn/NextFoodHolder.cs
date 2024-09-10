@@ -10,32 +10,28 @@ namespace FoodFusion
 
         private ObjectPool _pool;
         private FoodObject _nextFood;
+        private FoodObject _currentFood;
 
         [Inject]
-        private void Construct(ObjectPool pool)
-        {
-            _pool = pool;
-        }
+        private void Construct(ObjectPool pool) => _pool = pool;
 
-        private void Start() {
-            SetNext();
-        }
-
-        private void SetNext()
-        {
-            _nextFood = _pool.GetObject();
-            _image.sprite = _nextFood.Data.Sprite;
-        }
+        private void Start() => SetNext();
 
         public FoodObject GetObject()
         {
             if (_nextFood == null)
                 SetNext();
 
-            var temp = _nextFood;
+            _currentFood = _nextFood;
             SetNext();
 
-            return temp;
+            return _currentFood;
+        }
+
+        private void SetNext()
+        {
+            _nextFood = _pool.GetObject();
+            _image.sprite = _nextFood.Data.Sprite;
         }
     }
 }

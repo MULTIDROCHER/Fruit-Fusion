@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 public class MoveToMousePos : MonoBehaviour {
 	Vector3 newPosition;
 	bool canMove = true;

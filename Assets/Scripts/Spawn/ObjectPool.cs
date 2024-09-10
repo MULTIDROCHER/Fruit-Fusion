@@ -22,7 +22,7 @@ namespace FoodFusion
 
         public FoodObject GetObject(FoodData data = null)
         {
-            if (_pool.Count < 0)
+            if (_pool.Count == 0)
                 Initialize(_poolSize);
 
             return SetFood(data);
@@ -43,11 +43,7 @@ namespace FoodFusion
         private FoodObject SetFood(FoodData data)
         {
             var food = _pool.Dequeue();
-
-            if (data != null)
-                food.Initialize(_assets.GetNext(data));
-            else
-                food.Initialize(_assets.GetRandom());
+            food.Initialize(data != null ? _assets.GetNext(data) : _assets.GetRandom());
 
             return food;
         }

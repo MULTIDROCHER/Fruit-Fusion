@@ -20,26 +20,15 @@ namespace FoodFusion
             _foodHolder = foodHolder;
         }
 
-        private void Start()
-        {
-            GetObject();
-            _input.OnMouseUp += Drop;
-        }
+        private void Awake() => _input.OnMouseUp += Drop;
 
-        private void OnEnable()
-        {
-            _currentObject?.gameObject.SetActive(true);
-        }
+        private void Start() => SetObject();
 
-        private void OnDisable()
-        {
-            _currentObject?.gameObject.SetActive(false);
-        }
+        private void OnEnable() => _currentObject?.gameObject.SetActive(true);
 
-        private void OnDestroy()
-        {
-            _input.OnMouseUp -= Drop;
-        }
+        private void OnDisable() => _currentObject?.gameObject.SetActive(false);
+
+        private void OnDestroy() => _input.OnMouseUp -= Drop;
 
         private void Drop()
         {
@@ -51,7 +40,7 @@ namespace FoodFusion
             StartCoroutine(UpdateCurrentObject());
         }
 
-        private void GetObject()
+        private void SetObject()
         {
             if (_currentObject != null)
                 return;
@@ -65,7 +54,7 @@ namespace FoodFusion
         private IEnumerator UpdateCurrentObject()
         {
             yield return _createDelay;
-            GetObject();
+            SetObject();
         }
 
         private Vector3 AddForce()

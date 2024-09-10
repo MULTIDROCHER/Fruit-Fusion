@@ -9,10 +9,7 @@ namespace FoodFusion
         private Blender _blender;
 
         [Inject]
-        private void Construct(Blender blender)
-        {
-            _blender = blender;
-        }
+        private void Construct(Blender blender) => _blender = blender;
 
         private void Awake()
         {
@@ -26,14 +23,8 @@ namespace FoodFusion
             _blender.Deactivated -= Enable;
         }
 
-        private void Disable()
-        {
-            _dropper.gameObject.SetActive(false);
-        }
+        private void Disable() => _dropper.gameObject.SetActive(false);
 
-        private void Enable()
-        {
-            _dropper.gameObject.SetActive(true);
-        }
+        private void Enable() => _dropper.gameObject.SetActive(true);
     }
 }

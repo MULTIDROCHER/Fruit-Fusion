@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class ZippyWater2DBeachBall : MonoBehaviour {
 	Rigidbody2D cacheRigidbody2D;

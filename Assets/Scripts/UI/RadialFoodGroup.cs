@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using System;
 using UnityEngine;
 using UnityEngine.UI;
-using YG;
 using Zenject;
 using System.Linq;
 
@@ -16,7 +12,7 @@ namespace FoodFusion
 
         private DataAssets _assets;
         private Image[] _foodGroup;
-        private Color _openedColor = new Color(1, 1, 1, 1);
+        private Color _openedColor = new (1, 1, 1, 1);
 
         [Inject]
         private void Construct(DataAssets assets)

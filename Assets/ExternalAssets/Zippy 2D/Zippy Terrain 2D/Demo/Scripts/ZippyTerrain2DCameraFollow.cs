@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 
 public class ZippyTerrain2DCameraFollow : MonoBehaviour {
 	public Transform target;

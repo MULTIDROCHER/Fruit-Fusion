@@ -1,6 +1,5 @@
 #pragma warning disable 0618
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(MeshRenderer))]
